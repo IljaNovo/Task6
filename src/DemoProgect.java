@@ -1,5 +1,3 @@
-import org.apache.commons.cli.*;
-
 public class DemoProgect {
 
     public static void main(String[] args) {
@@ -8,7 +6,7 @@ public class DemoProgect {
         try {
             parserParams.parse(args);
         }
-        catch (ParseException e) {
+        catch (Throwable e) {
             System.out.println("Error Parse");
         }
         Operation operation = null;
