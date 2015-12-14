@@ -10,11 +10,9 @@ public class main {
 
         ret.setArgs(2);
         ret.setOptionalArg(false);
-        ret.setArgName("login ");
 
         ret1.setArgs(2);
         ret1.setOptionalArg(false);
-        ret1.setArgName("login ");
 
 
         Options posixOptions = new Options();
