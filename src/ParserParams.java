@@ -1,12 +1,12 @@
 import org.apache.commons.cli.*;
 
-public class ParseParams {
+public class ParserParams {
 
-    Option leftParam;
-    Option rightParam;
-    Option signOperation;
+    private Option leftParam;
+    private Option rightParam;
+    private Option signOperation;
 
-    public ParseParams() {
+    public ParserParams() {
         this.leftParam = createOption("l", true, "LeftParam");
         this.rightParam = createOption("r", true, "RightParam");
         this.signOperation = createOption("o", true, "SignOperation");
@@ -20,7 +20,7 @@ public class ParseParams {
         return newOption;
     }
 
-    public void parse(String[] commandLineArguments) {
+    public void parse(String[] commandLineArguments) throws ParseException{
         Options posixOptions = new Options();
 
         posixOptions.addOption(this.leftParam);
@@ -29,35 +29,49 @@ public class ParseParams {
 
         CommandLineParser cmdLinePosixParser = new PosixParser();
         CommandLine commandLine = null;
+        String[] params = new String[3];
 
         try {
             commandLine = cmdLinePosixParser.parse(posixOptions, commandLineArguments);
-        } catch (ParseException e) {
-            e.getStackTrace();
-        }
-        String[] params = new String[3];
 
-        if (commandLine.hasOption("l") && commandLine.hasOption("r") && commandLine.hasOption("o")) {
-            params[0] = commandLine.getOptionValues("l")[0];
-            params[1] = commandLine.getOptionValues("r")[0];
-            params[2] = commandLine.getOptionValues("o")[0];
+            if (commandLine.hasOption("l") && commandLine.hasOption("r") && commandLine.hasOption("o")) {
+                params[0] = commandLine.getOptionValues("l")[0];
+                params[1] = commandLine.getOptionValues("r")[0];
+                params[2] = commandLine.getOptionValues("o")[0];
+            }
+
+            setValueParams(params[0], params[1], params[2]);
         }
-        setValueParams(params[0], params[1], params[2]);
+        catch (ParseException e) {
+            throw new ParseException("Error Parse");
+        }
+        catch (Throwable e) {
+            throw new ParseCommandLineExeption("Error Parse");
+        }
     }
 
-    private int valueLeftParam;
-    private int valueRightParam;
-    private String symbolSignOperation;
+    private Integer valueLeftParam = null;
+    private Integer valueRightParam = null;
+    private String symbolSignOperation = null;
 
-    public int getValueLeftParam() {
+    public int getValueLeftParam(){
+        if (valueLeftParam == null) {
+            throw new NullPointerException();
+        }
         return valueLeftParam;
     }
 
     public int getValueRightParam() {
+        if (valueRightParam == null) {
+            throw new NullPointerException();
+        }
         return valueRightParam;
     }
 
     public String getSymbolSignOperation() {
+        if (symbolSignOperation == null) {
+            throw new NullPointerException();
+        }
         return symbolSignOperation;
     }
 
