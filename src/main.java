@@ -1,12 +1,16 @@
 public class main {
 
     public static void main(String[] args) {
-        Months mounth = Months.Janvar;
+        Months m = Months.April;
+
+       // m.getCountDays();
+
+       // m.getNextMonth();
 
         //System.out.println(Months.valueOf("Fevral"));
 
-        Months m = Months.Aprel;
 
-        System.out.println(m.name());
+
+        System.out.println(m.getCountDays() + " " + m.getNextMonth());
     }
 }

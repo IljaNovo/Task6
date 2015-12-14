@@ -1,30 +1,77 @@
 public enum Months {
-    January(31, Months.February),
-    February(30, Months.March),
-    March(31, Months.April),
-    April(30, Months.May),
-    May(31, Months.June),
-    June(30, Months.July),
-    July(31, Months.August),
-    August(31, Months.September),
-    September(30, Months.October),
-    October(31, Months.November),
-    November(30, Months.December),
-    December(31, Months.January);
+
+    January(31) {
+        public Months getNextMonth() {
+            return February;
+        }
+    },
+    February(30) {
+        public Months getNextMonth() {
+            return March;
+        }
+    },
+    March(31) {
+        public Months getNextMonth() {
+            return April;
+        }
+    },
+    April(30) {
+        public Months getNextMonth() {
+            return May;
+        }
+    },
+    May(31) {
+        public Months getNextMonth() {
+            return June;
+        }
+    },
+
+    June(30) {
+        public Months getNextMonth() {
+            return July;
+        }
+    },
+
+    July(31) {
+        public Months getNextMonth() {
+            return August;
+        }
+    },
+    August(31) {
+        public Months getNextMonth() {
+            return September;
+        }
+    },
+    September(30) {
+        public Months getNextMonth() {
+            return October;
+        }
+    },
+    October(31) {
+        public Months getNextMonth() {
+            return November;
+        }
+    },
+    November(30) {
+        public Months getNextMonth() {
+            return October;
+        }
+    },
+    December(31) {
+        public Months getNextMonth() {
+            return January;
+        }
+    };
 
     int countDays;
-    Months nextMonth;
 
-    private Months(int countDays, Months nextMonth) {
+    private Months(int countDays) {
         this.countDays = countDays;
-        this.nextMonth = nextMonth;
     }
 
     public int getCountDays() {
         return this.countDays;
     }
 
-    public Months next() {
-        return this.nextMonth;
-    }
+    public abstract Months getNextMonth();
 }
